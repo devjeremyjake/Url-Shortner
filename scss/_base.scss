@@ -1,0 +1,42 @@
+@use "./variables";
+@use "./functions";
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background-color: variables.$default;
+	font-family: 'Poppins', sans-serif;
+	overflow-x: auto;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	margin: 0;
+}
+
+ul {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+	color: variables.$Grayish-Violet;
+}
+
+.btn {
+	padding: 10px 20px;
+	border-radius: 30px;
+
+	&-primary {
+		background-color: variables.$Cyan;
+		color: variables.$default;
+	}
+}
