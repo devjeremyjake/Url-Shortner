@@ -2,7 +2,6 @@ const nav = document.getElementsByClassName('navbar__menu')[0];
 const leftTab = document.getElementsByClassName('left')[0];
 const rightTab = document.getElementsByClassName('right')[0];
 const button = document.getElementById('button');
-// const copy = document.querySelector('btn-copy');
 
 nav.addEventListener('click', () => {
 	leftTab.classList.toggle('show');
@@ -11,6 +10,7 @@ nav.addEventListener('click', () => {
 
 // Url function
 button.addEventListener('click', (event) => {
+	event.preventDefault();
 	formField = document.getElementsByClassName('formField')[0].value;
 	fetch(`https://api.shrtco.de/v2/shorten?url=${formField}`)
 		.then((res) => res.json())
@@ -31,6 +31,8 @@ button.addEventListener('click', (event) => {
 			localStorage.setItem('data', JSON.stringify(oldData));
 		})
 		.catch((err) => console.log(err));
+	// Clear form field
+	document.getElementsByClassName('formField')[0].value = '';
 });
 
 // Fetch data for display
@@ -58,14 +60,16 @@ fetchShortUrl = () => {
 	}
 };
 
-fetchShortUrl();
+// display function
+setInterval(fetchShortUrl, 2000);
 
+// Change Button color and text on click
 function onClick(id, value) {
 	navigator.clipboard.writeText(value);
-	document.querySelector('.link').innerText = 'Copied!!!';
-	document.querySelector('.link').classList.toggle('active');
+	document.querySelectorAll('.link')[id].innerText = 'Copied!!!';
+	document.querySelectorAll('.link')[id].classList.toggle('active');
 	setTimeout(() => {
-		document.querySelector('.link').innerText = 'Copy';
-		document.querySelector('.link').classList.remove('active');
+		document.querySelectorAll('.link')[id].innerText = 'Copy';
+		document.querySelectorAll('.link')[id].classList.remove('active');
 	}, 2000);
 }
